@@ -6,6 +6,6 @@ Just a heads-up, I will be labelling them as the second year of a standard seaso
 
 ![image](https://github.com/IsThatYouCarl/Web-scrapping-to-get-top-5-league-tables-in-csv-format/assets/90243903/28aa57c3-ed19-4343-9177-f365c96c6a28)
 
-so I'm collecting all the tables from 1992-1993 to 2023-24 season, you can change the value '1993' to any value you want to go even further back.
+so I'm collecting all the tables from 1992-1993 to 2023-24 season, you can change the value '1992' in the for loop to any value you want to go even further back.
 
 
