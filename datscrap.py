@@ -152,7 +152,7 @@ def get_league_table(league_name):
     league_code = Leagues[league_name]
     url = f'https://www.transfermarkt.com/bundesliga/tabelle/wettbewerb/{league_code}?saison_id='
     get_table(url, df)
-    csv_path = f'{league_name}-league-tableslmao.csv'
+    csv_path = f'{league_name}-league-tables.csv'
     df.to_csv(csv_path, index = False)
 
 get_league_table("bundesliga")
