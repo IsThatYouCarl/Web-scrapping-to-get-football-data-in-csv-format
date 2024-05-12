@@ -1,4 +1,7 @@
-I wrote this python program to perform web scrapping on the website https://www.transfermarkt.com/ so that I can get all the league tables across all top 5 leagues.
+I wrote this python program to perform web scrapping on the website https://www.transfermarkt.com/ so that I can extract desired football data. It can:
+
+1. Get league tables of top 5 league in any year
+2. Get top scorers data
 
 I attached all 5 other csv files to demonstrate how the final result would look like.
 
