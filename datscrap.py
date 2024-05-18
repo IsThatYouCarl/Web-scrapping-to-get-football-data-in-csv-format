@@ -2,9 +2,12 @@ import csv
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+from url_data import League_groups, Age_group, Position_groups, Main_position_list, Seasons, Nationality_list, Leagues
+from itertools import zip_longest
+import os
 
-def get_table(url_league, df):
-    for year in range(1992, 2024):
+def get_table(url_league, df, start_year, end_year):
+    for year in range(int(start_year), int(end_year)):
         headers = {'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KTML, Like Gecko) Chrome/47.0.2526.106 Safari/537.36'}
         url = f'{url_league}{year}'
     
@@ -50,7 +53,7 @@ def get_table(url_league, df):
 
         print(year)
 
-def get_topscorer(Season, League, Nationality, Age_Group, Position, Main_Position, page):
+def get_topscorer(Season, League, Nationality, Age_Group, Position, Main_Position, page, file_path):
     saison_id = int(Seasons[Season])
     OptionKey = int(League_groups[League])
 
@@ -95,8 +98,8 @@ def get_topscorer(Season, League, Nationality, Age_Group, Position, Main_Positio
             top_scorer_collection(df_top_scorer, url)
             print(f'page = {current_page}')
 
-    csv_path = 'top_scorer.csv'
-    df_top_scorer.to_csv(csv_path, index = False)
+    # csv_path = 'top_scorer.csv'
+    df_top_scorer.to_csv(file_path, index = False)
 
 
 def top_scorer_collection(df_top_scorer, url):   
@@ -147,14 +150,15 @@ def top_scorer_collection(df_top_scorer, url):
         new_row = {"Rank": int(item[0]), "Name": item[1], "Age":item[3], "Club":item[2], "Matches":item[4], "Goals":item[5]}
         df_top_scorer.loc[len(df_top_scorer)] = new_row
 
-def get_league_table(league_name):
+def get_league_table(league_name, start_year, end_year, file_path):
     df = pd.DataFrame(columns = ['Season_End_Year','Team', 'Rank', 'MP', 'W', 'D', 'L', 'GD', 'Pts'])
     league_code = Leagues[league_name]
     url = f'https://www.transfermarkt.com/bundesliga/tabelle/wettbewerb/{league_code}?saison_id='
-    get_table(url, df)
-    csv_path = f'{league_name}-league-tables.csv'
-    df.to_csv(csv_path, index = False)
+    get_table(url, df, start_year, end_year)
+    # csv_path =os.path.join(file_path, f'{league_name}-league-tables.csv')
+    df.to_csv(file_path, index = False)
 
-get_league_table("bundesliga")
-get_topscorer("23/24","Top 5 leagues", "All nationalities", "All age groups","All positions","All positions", 5)
-#refer to url_data.py for all the options
+
+
+# get_league_table("bundesliga", 1992, 2023)
+# get_topscorer("23/24","Top 5 leagues", "All nationalities", "All age groups","All positions","All positions", 5)
